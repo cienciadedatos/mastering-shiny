@@ -1,104 +1,103 @@
-# Preface {.unnumbered}
+# Prefacio {.unnumbered}
 
 ```{r include = FALSE}
 source("_common.R")
 ```
-**CAPÍTULO EN PROCESO DE TRADUCCIÓN**
 
-## What is Shiny?
+## ¿Qué es Shiny?
 
-If you've never used Shiny before, welcome!
-Shiny is an R package that allows you to easily create rich, interactive web apps.
-Shiny allows you to take your work in R and expose it via a web browser so that anyone can use it.
-Shiny makes you look awesome by making it easy to produce polished web apps with a minimum amount of pain.
+Si nunca antes has usado Shiny, ¡te doy la bienvenida!
+Shiny es un paquete de R que te permite crear con facilidad aplicaciones web interactivas y valiosas.
+Shiny te permite tomar tu trabajo en R y exponerlo a través de un navegador web para que cualquier persona pueda utilizarlo. 
+Shiny te hace lucir increíble al hacer posible producir fácilmente aplicaciones web refinadas con un mínimo de sufrimiento. 
 
-In the past, creating web apps was hard for most R users because:
+En el pasado, crear aplicaciones web era difícil para la mayoría de las personas que usaban R porque:
 
--   You need a deep knowledge of web technologies like HTML, CSS and JavaScript.
+-   se necesita un conocimiento profundo de tecnologías web como HTML, CSS y JavaScript.
 
--   Making complex interactive apps requires careful analysis of interaction flows to make sure that when an input changes, only the related outputs are updated.
+-   hacer aplicaciones interactivas complejas requiere un análisis cuidadoso de los flujos de interacción para asegurarse de que cuando un input cambia, solo los outputs relacionados se actualizan. 
 
-Shiny makes it significantly easier for the R programmer to create web apps by:
+Shiny hace significativamente más fácil crear aplicaciones web para alguien que programa en R porque:
 
--   Providing a carefully curated set of user interface (**UI** for short) functions that generate the HTML, CSS, and JavaScript needed for common tasks.
-    This means that you don't need to know the details of HTML/CSS/JavaScript until you want to go beyond the basics that Shiny provides for you.
+-   Proporciona un conjunto cuidadosamente seleccionado de funciones de interfaz de usuario (**UI**) que generan el HTML, CSS y JavaScript necesario para tareas comunes.
+    Esto significa que no es necesario que conozcas todos los detalles sobre HTML/CSS/JavaScript hasta que quieras ir más allá de lo básico que Shiny provee para ti.
 
--   Introducing a new style of programming called **reactive programming** which automatically tracks the dependencies of pieces of code.
-    This means that whenever an input changes, Shiny can automatically figure out how to do the smallest amount of work to update all the related outputs.
+-   Introduce un nuevo estilo de programación, conocida como **programación reactiva**, que automáticamente monitorea las dependencias de los bloques de código. 
+    Esto significa que cada vez que un input cambia, Shiny puede resolver automáticamente cómo actualizar todos los outputs relacionados con ese input con la menor cantidad de trabajo. 
+    
+La gente usa Shiny para:
 
-People use Shiny to:
+-   Crear tableros (_dashboards_) para hacer seguimiento de importantes indicadores de rendimiento de alto nivel, que facilitan, a la vez, el desglose de las métricas que requieren más investigación. 
 
--   Create dashboards that track important high-level performance indicators, while facilitating drill down into metrics that need more investigation.
+-   Remplazar cientos de páginas de PDFs con aplicaciones interactivas que permiten a usuarios y usuarias ir directamente a la parte de los resultados que les interesan.
 
--   Replace hundreds of pages of PDFs with interactive apps that allow the user to jump to the exact slice of the results that they care about.
+-   Comunicar modelos complejos a una audiencia no técnica usando visualizaciones informativas y análisis de sensibilidad interactivos.
 
--   Communicate complex models to a non-technical audience with informative visualisations and interactive sensitivity analysis.
+-   Proveer un autoservicio de análisis de datos para flujos de trabajo comunes, remplanzando peticiones vía correo electrónico por una aplicación Shiny que permite a las personas cargar sus propios datos y realizar análisis estandar.
+    Puedes hacer que análisis sofisticados en R estén disponibles para personas sin conocimientos de programación.
 
--   Provide self-service data analysis for common workflows, replacing email requests with a Shiny app that allows people to upload their own data and perform standard analyses.
-    You can make sophisticated R analyses available to users with no programming skills.
+-   Crear demos interactivos para enseñar conceptos de estadística y ciencia de datos que permita a quienes están aprendiendo modificar los inputs y observar los efectos de esas modificaciones en un análisis.
 
--   Create interactive demos for teaching statistics and data science concepts that allow learners to tweak inputs and observe the downstream effects of those changes in an analysis.
+En resumen, Shiny te da la posibilidad de traspasar algunos de tus superpoderes de R a cualquier persona que pueda utilizar la web.
 
-In short, Shiny gives you the ability to pass on some of your R superpowers to anyone who can use the web.
+## ¿Quién debería leer este libro?
 
-## Who should read this book?
+Este libro está dirigido principalmente a dos tipos de audiencia:
 
-This book is aimed at two main audiences:
+-   Personas que usan R y que están interesadas en aprender sobre Shiny para convertir sus análisis en aplicaciones web interactivas.
+    Para aprovechar al máximo este libro, deberías ya sentir comodidad usando R para análisis de datos y haber escrito al menos un par de funciones. 
 
--   R users who are interested in learning about Shiny in order to turn their analyses into interactive web apps.
-    To get the most out of this book, you should be comfortable using R to do data analysis, and should have written at least a few functions.
+-   Personas que ya usan Shiny y que quieren profundizar su conocimiento sobre la teoría que está a la base con el fin de escribir más rápido y con más facilidad aplicaciones de mayor calidad. 
+    Encontrarás este libro particularmente útil si tus aplicaciones están comenzando a hacerse más grandes y estás empezando a tener problemas para manejar la complejidad. 
 
--   Existing Shiny users who want to improve their knowledge of the theory underlying Shiny in order to write higher-quality apps faster and more easily.
-    You should find this book particularly helpful if your apps are starting to get bigger and you're starting to have problems managing the complexity.
+## ¿Qué aprenderás?
 
-## What will you learn?
+El libro está dividido en cuatro partes:
 
-The book is divided into four parts:
+1.  En "Comenzando" aprenderás los conceptos básicos sobre Shiny para que puedas ponerte en marcha lo más rápido posible. 
+    Aprenderás sobre los elementos básicos de la estructura de una aplicación, los componentes útiles de la interfaz de usuario (UI) y los fundamentos de la programación reactiva.
 
-1.  In "Getting started", you'll learn the basics of Shiny so you can get up and running as quickly as possible.
-    You'll learn about the basics of app structure, useful UI components, and the foundations of reactive programming.
+2.  "Shiny en acción" toma como base los conceptos básicos para ayudarte a resolver problemas comunes, como dar retroalimentación a usuarios y usuarias, cargar y descargar datos, generar interfaces de usuario con código, reducir la duplicación de código y usar Shiny para programar con el tidyverse.
 
-2.  "Shiny in action" builds on the basics to help you solve common problems including giving feedback to the user, uploading and downloading data, generating UI with code, reducing code duplication, and using Shiny to program the tidyverse.
+3.  En "Dominar la reactividad", profundizarás en la teoría y práctica de la programación reactiva, el paradigma de programación que está a la base de Shiny. 
+    Si ya utilizas Shiny, este capítulo será particularmente valioso, ya que te dará una base teórica sólida que te permitirá crear nuevas herramientas específicamente diseñadas para tus propios problemas. 
 
-3.  In "Mastering reactivity", you'll go deep into the theory and practice of reactive programming, the programming paradigm that underlies Shiny.
-    If you're an existing Shiny user, you'll get the most value out of this chapter as it will give you a solid theoretical underpinning that will allow you to create new tools specifically tailored for your problems.
+4.  Finalmente, en "Mejores prácticas" terminaremos con una revisión de técnicas útiles para hacer que tus aplicaciones Shiny funcionen bien en producción.
+    Aprenderás a descomponer aplicaciones complejas en funciones y módulos, a utilizar paquetes para organizar tu código, a testear tu código para asegurarte que funciona correctamente y a medir y mejorar el desempeño de tus aplicaciones.
 
-4.  Finally, in "Best practices" we'll finish up with a survey of useful techniques for making your Shiny apps work well in production.
-    You'll learn how to decompose complex apps into functions and modules, how to use packages to organise your code, how to test your code to ensure it's correct, and how to measure and improve performance.
+## ¿Qué no aprenderás?
 
-## What won't you learn?
+El foco de este libro es crear aplicaciones Shiny efectivas y entender la teoría sobre la reactividad que está a la base. 
+Haré mi mejor esfuerzo para mostrar mejores prácticas de ciencia de datos, programación en R e ingeniería de software, pero necesitarás otras referencias para dominar estas importantes habilidades. 
+Si disfrutas mi escritura en este libro, podrían gustarte mis otros libros sobre estos temas: [R for Data Science](http://r4ds.had.co.nz/), que tiene una [versión en español](https://es.r4ds.hadley.nz/), [Advanced R](http://adv-r.hadley.nz/) y [R Packages](http://r-pkgs.org/).
 
-The focus of this book is making effective Shiny apps and understanding the underlying theory of reactivity.
-I'll do my best to showcase best practices for data science, R programming, and software engineering, but you'll need other references to master these important skills.
-If you enjoy my writing in this book, you might enjoy my other books on these topics: [R for Data Science](http://r4ds.had.co.nz/), [Advanced R](http://adv-r.hadley.nz/), and [R Packages](http://r-pkgs.org/).
+Existen también un número importante de temas específicos sobre Shiny que no serán abordados: 
 
-There are also a number of important topics specific to Shiny that I don't cover:
+-   Este libro solo cubre el set de herramientas de interfaz de usuario que viene integrado en Shiny. 
+    Este no proporciona el diseño más sexy posible, pero es fácil de aprender y te puede llevar lejos. 
+    Si tienes necesidades adicionales (o simplemente te aburres del diseño por defecto), existe una serie de otros paquetes que proveen _front ends_ alternativos. 
+    Revisa la sección \@ref(other-tools) para más detalles.
 
--   This book only covers the built-in user interface toolkit.
-    This doesn't provide the sexiest possible design, but it's simple to learn and gets you a long way.
-    If you have additional needs (or just get bored with the defaults), there are number of other packages that provide alternative front ends.
-    See Section \@ref(other-tools) for more details.
+-   Implementación de aplicaciones Shiny.
+    Llevar aplicaciones Shiny "a producción" está fuera del alcance de este libro, ya que es algo que varía de compañía a compañía y que en gran parte no está relacionado con R (la mayoría de los desafíos tienden a ser culturales u organizacionales, no técnicos).
+    Si te estás iniciando en el tema de Shiny en producción, te sugiero partir viendo la charla magistral de Joe Cheng en la rstudio::conf de 2019: <https://rstudio.com/resources/rstudioconf-2019/shiny-in-production-principles-practices-and-tools/>.
+    Eso te dará una mirada panorámica que discute de manera general qué es lo que implica poner Shiny en producción y cómo sobreponerse a los desafíos que seguramente enfrentarás en el proceso. 
+    Una vez que termines con eso, revisa el [sitio web de RStudio Connect (en inglés)](https://rstudio.com/products/connect/) para aprender sobre los productos de RStudio para implementar aplicaciones dentro de tu compañía y el [sitio web de Shiny](https://shiny.rstudio.com/articles/#deployment) para otros escenarios comunes de implementación.
 
--   Deployment of Shiny apps.
-    Putting Shiny "into production" is outside the scope of this book because it hugely varies from company to company, and much of it is unrelated to R (the majority of challenges tend to be cultural or organisational, not technical).
-    If you're new to Shiny in production, I recommend by starting with Joe Cheng's 2019 rstudio::conf keynote: <https://rstudio.com/resources/rstudioconf-2019/shiny-in-production-principles-practices-and-tools/>.
-    That will give you the lay of the land, discussing broadly what putting Shiny into production entails and how to overcome some of the challenges that you're likely to face.
-    Once you've done that, see the [RStudio Connect website](https://rstudio.com/products/connect/) to learn about RStudio's product for deploying apps within your company and the [Shiny website](https://shiny.rstudio.com/articles/#deployment) for other common deployment scenarios.
+## Prerrequisitos {#prerequisites}
 
-## Prerequisites {#prerequisites}
+Antes de continuar, asegúrate de tener todo el software necesario para seguir este libro:
 
-Before we continue, make sure you have all the software you need for this book:
+-   **R**: Si todavía no tienes R instalado, quizás estás leyendo el libro equivocado; a lo largo del libro se asume familiaridad básica con R. 
+    Si quieres aprender a usar R, te recomiendo mi libro[*R for Data Science*](https://r4ds.had.co.nz/), que está diseñado para ponerte en marcha con R con el mínimo de complicaciones.
 
--   **R**: If you don't have R installed already, you may be reading the wrong book; I assume a basic familiarity with R throughout this book.
-    If you'd like to learn how to use R, I'd recommend my [*R for Data Science*](https://r4ds.had.co.nz/) which is designed to get you up and running with R with a minimum of fuss.
+-   **RStudio**: RStudio es un entorno de desarrollo integrado (IDE) para R que es gratuito y de código abierto.
+    Si bien puedes escribir y usar aplicaciones Shiny con cualquier entorno de R (incluida la GUI de R y [ESS](http://ess.r-project.org)), RStudio tiene algunas características muy atractivas espacíficamente pensadas para la creación, depuración e implementación de aplicaciones Shiny.
+    Te recomiendo probarlo, pero no es algo necesario para tener éxito con Shiny o con este libro. 
+    Puedes descargar RStudio Desktop desde <https://www.rstudio.com/products/rstudio/download>
 
--   **RStudio**: RStudio is a free and open source integrated development environment (IDE) for R.
-    While you can write and use Shiny apps with any R environment (including R GUI and [ESS](http://ess.r-project.org)), RStudio has some nice features specifically for authoring, debugging, and deploying Shiny apps.
-    We recommend giving it a try, but it's not required to be successful with Shiny or with this book.
-    You can download RStudio Desktop from <https://www.rstudio.com/products/rstudio/download>
-
--   **R packages**: This book uses a bunch of R packages.
-    You can install them all at once by running:
+-   **Paqutes de R**: Este libro utiliza una serie de paquetes de R.
+    Puedes instalarlos todos de una vez ejecutando: 
 
     ```{r, echo = FALSE, cache = FALSE}
     deps <- desc::desc_get_deps()
@@ -115,13 +114,13 @@ Before we continue, make sure you have all the software you need for this book:
     ```{r code = install, eval = FALSE}
     ```
 
-    If you've downloaded Shiny in the past, make sure that you have at least version 1.6.0.
+    Si ya tienes descargado Shiny, asegúrate que es al menos la versión 1.6.0.
 
-## Acknowledgements
+## Agradecimientos
 
-This book was written in the open and chapters were advertised on twitter when complete.
-It is truly a community effort: many people read drafts, fixed typos, suggested improvements, and contributed content.
-Without those contributors, the book wouldn't be nearly as good as it is, and I'm deeply grateful for their help.
+Este libro fue escrito de forma abierta y los capítulos fueron anunciados en Twitter cuando estuvieron listos. 
+Es realmente un esfuerzo de la comunidad: muchas personas leyeron los borradores, arreglaron erratas, sugirieron mejoras y contribuyeron con contenido. 
+Sin estas contribuciones el libro no sería tan bueno como es, por lo que estoy profundamente agradecido por su ayuda. 
 
 ```{r, eval = FALSE, echo = FALSE}
 library(tidyverse)
@@ -172,13 +171,13 @@ cat(paste0(contributors$desc, collapse = ", "))
 cat(".\n")
 ```
 
-## Colophon
+## Colofón
 
-This book was written in [RStudio](http://www.rstudio.com/ide/) using [bookdown](http://bookdown.org/).
-The [website](http://mastering-shiny.org/) is hosted with [netlify](http://netlify.com/), and automatically updated after every commit by [Github Actions](https://github.com/features/actions).
-The complete source is available from [GitHub](https://github.com/hadley/mastering-shiny).
+Este libro fue escrito en [RStudio](http://www.rstudio.com/ide/) usando [bookdown](http://bookdown.org/).
+El [sitio web](http://mastering-shiny.org/) está hospedado en [netlify](http://netlify.com/) y se actualiza automáticamente luego de cada _commit_ usando [Github Actions](https://github.com/features/actions).
+El código fuente completo se encuentra disponible en [GitHub](https://github.com/hadley/mastering-shiny).
 
-This version of the book was built with `r R.version.string` and the following packages:
+Esta versión del libro fue compilada con `r R.version.string` y los siguientes paquetes:
 
 ```{r, echo = FALSE, results="asis"}
 pkgs <- sessioninfo::package_info(pkgs, dependencies = FALSE)

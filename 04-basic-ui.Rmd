@@ -8,22 +8,24 @@ source("demo.R")
 
 ## Introducción
 
-Ahora que ya tienes una aplicación básica, podemos empezar a explorar los 
+Ahora que ya tienes una aplicación básica, podemos empezar a explorar los
 detalles que hacen que Shiny funcione. Como has visto en el capítulo anterior, 
-Shiny anima a separar el código que genera tu interfaz de usuario (el front-end)
-del código que dirige el comportamiento de tu aplicación (el back-end).
+Shiny anima a separar el código que genera tu interfaz de usuario (el 
+*front-end*) del código que dirige el comportamiento de tu aplicación 
+(el *back-end*).
 
-En este capítulo, nos centraremos en el front-end, y te daremos un tour 
-relámpago por las entradas y salidas HTML que proporciona Shiny. Esto le da la 
+En este capítulo, nos centraremos en el *front-end* y te daremos un paseo rápido
+por las entradas y salidas HTML que proporciona Shiny. Esto le da la 
 capacidad de capturar muchos tipos de datos y mostrar muchos tipos de salida de  
 R.Todavía no tiene muchas formas de unir las entradas y salidas, pero volveremos
 a ello en el capítulo \@ref(action-layout).
 
 Aquí me ceñiré principalmente a las entradas y salidas incorporadas en el propio
 Shiny. Sin embargo, hay una rica y vibrante comunidad de paquetes de extensión, 
-como [shinyWidgets](https://github.com/dreamRs/shinyWidgets), [colorpicker](https://github.com/daattali/colourpicker), y [
-sorttable](https://rstudio.github.io/sortable/).
-Puedes encontrar una lista completa y activamente mantenida de otros paquetes en <https://github.com/nanxstats/awesome-shiny-extensions>, mantenida por
+como [shinyWidgets](https://github.com/dreamRs/shinyWidgets), [colorpicker](https://github.com/daattali/colourpicker) y 
+[sorttable](https://rstudio.github.io/sortable/). Puedes encontrar una lista 
+completa y activamente mantenida de otros paquetes en
+<https://github.com/nanxstats/awesome-shiny-extensions>, mantenida por
 [Nan Xiao](https://nanx.me/).
 
 Como siempre, empezaremos cargando el paquete shiny:
@@ -35,7 +37,7 @@ library(shiny)
 ## Entradas {#inputs}
 
 Como vimos en el capítulo anterior, se utilizan funciones como `sliderInput()`,
-`selectInput()`, `textInput()`, y `numericInput()` para insertar controles de 
+`selectInput()`, `textInput()` y `numericInput()` para insertar controles de 
 entrada en la especificación de la IU. Ahora discutiremos la estructura común 
 que subyace a todas las funciones de entrada y daremos una rápida visión general
 de las entradas incorporadas en Shiny.
@@ -43,9 +45,9 @@ de las entradas incorporadas en Shiny.
 ### Estructura común
 
 Todas las funciones de entrada tienen el mismo primer argumento: `inputId`.
-Este es el identificador utilizado para conectar el front-end con el back-end: 
-si su UI tiene una entrada con el ID `"nombre", la función del servidor accederá
-a ella con `input$nombre`.
+Este es el identificador utilizado para conectar el *front-end* con el 
+*back-end*:  si su UI tiene una entrada con el ID `"nombre", la función del 
+servidor accederá a ella con `input$nombre`.
 
 El `inputId` tiene dos restricciones:
 
@@ -64,7 +66,7 @@ tercer parámetro suele ser `value`, que, cuando es posible, permite establecer
 el valor por defecto. El resto de parámetros son exclusivos del control.
 
 Al crear una entrada, recomiendo suministrar los argumentos `inputId` y `label`
-por posición, y todos los demás argumentos por nombre:
+por posición y todos los demás argumentos por nombre:
 
 ```{r, results = FALSE}
 sliderInput("min", "Límite (mínimo)", value = 50, min = 0, max = 100)
@@ -79,7 +81,7 @@ control, pero tendrás que leer la documentación para obtener todos los detalle
 ### Texto libre
 
 Recoge pequeñas cantidades de texto con `textInput()`, contraseñas con 
-`passwordInput()`[^basic-ui-1], y párrafos de texto con `textAreaInput()`.
+`passwordInput()`[^basic-ui-1] y párrafos de texto con `textAreaInput()`.
 
 [^basic-ui-1]: Todo lo que hace `passwordInput()` es ocultar lo que el usuario 
 está escribiendo, para que alguien que mire por encima de tu hombro no pueda 
@@ -135,7 +137,7 @@ ajustar su apariencia. Consulte `?sliderInput` y
 ### Fechas
 
 Recoge un solo día con `dateInput()` o un rango de dos días con 
-`dateRangeInput()`. Esto proporciona un cómodo selector de calendario, y 
+`dateRangeInput()`. Esto proporciona un cómodo selector de calendario y 
 argumentos adicionales como `datesdisabled` y `daysofweekdisabled` te permiten 
 restringir el conjunto de entradas válidas.
 
@@ -176,7 +178,7 @@ demo$takeScreenshot()
 ```
 
 Los botones de radio tienen dos buenas características: muestran todas las 
-opciones posibles, lo que los hace adecuados para listas cortas, y a través de 
+opciones posibles, lo que los hace adecuados para listas cortas y a través de 
 los argumentos `choiceNames`/`choiceValues`, pueden mostrar opciones distintas 
 al texto plano. El argumento `choiceNames` determina lo que se muestra al 
 usuario; `choiceValues` determina lo que se devuelve en la función del servidor.
@@ -269,7 +271,7 @@ demo <- demoApp$new("basic-ui/upload", ui)
 demo$takeScreenshot()
 ```
 
-``fileInput()`` requiere un manejo especial en el lado del servidor, y se 
+``fileInput()`` requiere un manejo especial en el lado del servidor y se 
 discute en detalle en el capítulo `@ref(action-transfer).
 
 ### Botones de acción {#action-buttons}
@@ -378,27 +380,28 @@ las entradas (`inputId`) y las salidas (`outputId`). No uso el nombre del primer
 argumento porque es muy importante y espero que recuerdes lo que hace sin una 
 pista adicional.
 
-Cada función `output` en el front end está acoplada a una función `render` en el
-back end. Hay tres tipos principales de salida, que corresponden a las tres 
+Cada función `output` en el *front-end* está acoplada a una función `render` en 
+el *back-end*. Hay tres tipos principales de salida, que corresponden a las tres 
 cosas que normalmente se incluyen en un informe: texto, tablas y gráficos. Las 
 siguientes secciones muestran los fundamentos de las funciones de salida en el 
-front-end, junto con las correspondientes funciones `render` en el back-end.
+*front-end*, junto con las correspondientes funciones `render` en el *back-end*.
 
-### Text
+### Texto
 
-Output regular text with `textOutput()` and fixed code and console output with `verbatimTextOutput()`.
+Salida de texto regular con `textOutput()` y código fijo y salida de consola 
+con `verbatimTextOutput()`.
 
 ```{r}
 ui <- fluidPage(
-  textOutput("text"),
+  textOutput("texto"),
   verbatimTextOutput("code")
 )
 server <- function(input, output, session) {
   output$text <- renderText({ 
-    "Hello friend!" 
+    "¡Hola amigo!" 
   })
   output$code <- renderPrint({ 
-    summary(1:10) 
+    resumen(1:10) 
   })
 }
 ```
@@ -408,23 +411,28 @@ demo <- demoApp$new("basic-ui/output-text", ui, server)
 demo$takeScreenshot()
 ```
 
-Note that the `{}` are only required in render functions if need to run multiple lines of code.
-As you'll learn shortly, you should do as little computation in your render functions as possible, which means you can often omit them.
-Here's what the server function above would look like if written more compactly::
+Ten en cuenta que los `{}` sólo son necesarios en las funciones de renderizado 
+si necesita ejecutar varias líneas de código. Como aprenderás en breve, deberías
+hacer el menor número de cálculos posible en tus funciones de renderizado, lo 
+que significa que a menudo puedes omitirlas. Así es como se vería la función de 
+servidor de arriba si se escribiera de forma más compacta:
 
 ```{r}
 server <- function(input, output, session) {
-  output$text <- renderText("Hello friend!")
+  output$text <- renderText("¡Hola amigo!")
   output$code <- renderPrint(summary(1:10))
 }
 ```
 
-Note that there are two render functions which behave slightly differently:
+Observa que hay dos funciones de renderización que se comportan de forma 
+ligeramente diferente:
 
--   `renderText()` combines the result into a single string, and is usually paired with `textOutput()`
--   `renderPrint()` *prints* the result, as if you were in an R console, and is usually paired with `verbatimTextOutput()`.
+- `renderText()` combina el resultado en una sola cadena y normalmente se 
+  empareja con `textOutput()`.
+- `renderPrint()` *imprime* el resultado, como si estuvieras en una consola de 
+  R y normalmente se empareja con `verbatimTextOutput()`.
 
-We can see the difference with a toy app:
+Podemos ver la diferencia con una aplicación de juguete:
 
 ```{r}
 ui <- fluidPage(
@@ -442,18 +450,23 @@ demo <- demoApp$new("basic-ui/text-vs-print", ui, server)
 demo$takeScreenshot()
 ```
 
-This is equivalent to the difference between `cat()` and `print()` in base R.
+Esto es equivalente a la diferencia entre `cat()` y `print()` en R básico.
 
-### Tables
+### Tablas
 
-There are two options for displaying data frames in tables:
+Hay dos opciones para mostrar marcos de datos en tablas:
 
--   `tableOutput()` and `renderTable()` render a static table of data, showing all the data at once.
+- `tableOutput()` y `renderTable()` muestran una tabla estática de datos, 
+mostrando todos los datos a la vez.
 
--   `dataTableOutput()` and `renderDataTable()` render a dynamic table, showing a fixed number of rows along with controls to change which rows are visible.
+- La opción `dataTableOutput()` y `renderDataTable()` muestran una tabla 
+dinámica, con un número fijo de filas y controles para cambiar las filas 
+visibles.
 
-`tableOutput()` is most useful for small, fixed summaries (e.g. model coefficients); `dataTableOutput()` is most appropriate if you want to expose a complete data frame to the user.
-If you want greater control over the output of `dataTableOutput()`, I highly recommend the [reactable](https://glin.github.io/reactable/index.html) package by Greg Lin.
+La función `tableOutput()` es más útil para resúmenes pequeños y fijos (por 
+ejemplo, los coeficientes del modelo); la función `dataTableOutput()` es más 
+apropiada si se quiere exponer un marco de datos completo al usuario. Si deseas 
+un mayor control sobre la salida de `dataTableOutput()`, recomendamos el paquete [reactable](https://glin.github.io/reactable/index.html) de Greg Lin.
 
 ```{r}
 ui <- fluidPage(
@@ -474,7 +487,8 @@ demo$takeScreenshot()
 
 ### Plots
 
-You can display any type of R graphic (base, ggplot2, or otherwise) with `plotOutput()` and `renderPlot()`:
+Puede mostrar cualquier tipo de gráfico de R (base, ggplot2 u otro) con 
+`plotOutput()` y `renderPlot()`:
 
 ```{r}
 ui <- fluidPage(
@@ -490,23 +504,30 @@ demo <- demoApp$new("basic-ui/output-plot", ui, server)
 demo$takeScreenshot()
 ```
 
-By default, `plotOutput()` will take up the full width of its container (more on that shortly), and will be 400 pixels high.
-You can override these defaults with the `height` and `width` arguments.
-We recommend always setting `res = 96` as that will make your Shiny plots match what you see in RStudio as closely as possible.
+Por defecto, `plotOutput()` ocupará todo el ancho de su contenedor (más sobre 
+esto en breve) y tendrá 400 píxeles de alto. Puedes anular estos valores por 
+defecto con los argumentos `height` y `width`. Recomendamos siempre establecer 
+`res = 96` ya que esto hará que sus gráficos de Shiny se ajusten a lo que se ve 
+en RStudio lo más posible.
 
-Plots are special because they are outputs that can also act as inputs.
-`plotOutput()` has a number of arguments like `click`, `dblclick`, and `hover`.
-If you pass these a string, like `click = "plot_click"`, they'll create a reactive input (`input$plot_click`) that you can use to handle user interaction on the plot, e.g. clicking on the plot.
-We'll come back to interactive plots in Shiny in Chapter \@ref(action-graphics).
+Los gráficos son especiales porque son salidas que también pueden actuar como 
+entradas. `plotOutput()` tiene un número de argumentos como `click`, `dblclick`
+y `hover`. Si les pasas una cadena, como `click = "plot_click"`, crearán una 
+entrada reactiva (`input$plot_click`) que puedes utilizar para manejar la 
+interacción del usuario en el gráfico, por ejemplo, haciendo clic en el gráfico.
+Volveremos a hablar de los gráficos interactivos en Shiny en el capítulo 
+`@ref(action-graphics).
 
-### Downloads
+### Descargas
 
-You can let the user download a file with `downloadButton()` or `downloadLink()`.
-These require new techniques in the server function, so we'll come back to that in Chapter \@ref(action-transfer).
+Puede permitir al usuario descargar un archivo con `downloadButton()` o 
+`downloadLink()`. Esto requiere nuevas técnicas en la función del servidor, así 
+que volveremos a ello en el Capítulo \ref(action-transfer).
 
 ### Exercises
 
-1.  Which of `textOutput()` and `verbatimTextOutput()` should each of the following render functions be paired with?
+1.  ¿Con cuál de las siguientes funciones de renderización debería emparejarse 
+    `textOutput()` y `verbatimTextOutput()`?
 
     a.  `renderPrint(summary(mtcars))`
 
@@ -516,11 +537,16 @@ These require new techniques in the server function, so we'll come back to that 
 
     d.  `renderText(str(lm(mpg ~ wt, data = mtcars)))`
 
-2.  Re-create the Shiny app from Section \@ref(plots), this time setting height to 300px and width to 700px.
-    Set the plot "alt" text so that a visually impaired user can tell that its a scatterplot of five random numbers.
+2.  Vuelve a crear la aplicación Shiny de la sección \@ref(plots), esta vez 
+    ajustando la altura a 300px y la anchura a 700px. Establece el texto "alt" 
+    del gráfico para que un usuario con problemas de visión pueda decir que es 
+    un gráfico de dispersión de cinco números aleatorios.
 
-3.  Update the options in the call to `renderDataTable()` below so that the data is displayed, but all other controls are suppress (i.e. remove the search, ordering, and filtering commands).
-    You'll need to read `?renderDataTable` and review the options at <https://datatables.net/reference/option/>.
+3.  Actualiza las opciones en la llamada a `renderDataTable()` para que los 
+    datos se muestren, pero todos los demás controles se supriman (es decir, 
+    elimina los comandos de búsqueda, ordenación y filtrado). Tendrás que leer 
+    `?renderDataTable` y revisar las opciones en 
+    <https://datatables.net/reference/option/>.
 
     ```{r}
     ui <- fluidPage(
@@ -531,12 +557,16 @@ These require new techniques in the server function, so we'll come back to that 
     }
     ```
 
-4.  Alternatively, read up on [reactable](https://glin.github.io/reactable), and convert the above app to use it instead.
+4.  Alternativamente, lee sobre [reactable](https://glin.github.io/reactable) y 
+convierte la aplicación anterior para usarla en su lugar.
 
-## Summary
+## Resumen
 
-This chapter has introduced you to the major input and output functions that make up the front end of a Shiny app.
-This was a big info dump, so don't expect to remember everything after a single read.
-Instead, come back to this chapter when you're looking for a specific component: you can quickly scan the figures, and then find the code you need.
+Este capítulo te ha presentado las principales funciones de entrada y salida que
+componen el *front-end* de una aplicación Shiny. Esto ha sido un gran volcado de 
+información, así que no esperes recordarlo todo después de una sola lectura. En 
+su lugar, vuelve a este capítulo cuando busques un componente específico: puedes
+escanear rápidamente las figuras y luego encontrar el código que necesitas.
 
-In the next chapter, we'll move on to the back end of a Shiny app: the R code that makes your user interface come to life.
+En el próximo capítulo, pasaremos al *back-end* de una aplicación Shiny: el 
+código R que hace que tu interfaz de usuario cobre vida.
